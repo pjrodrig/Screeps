@@ -8,14 +8,20 @@ module.exports = {
         {
             title: harvester,
             condition: function(assignments, buildings) {
-                return assignments.harvester < 3 && 
-                       buildings.spawn.energy < buildings.spawn.energyCapacity;
+                return assignments.harvester < 2 && 
+                       buildings.emptyStorage.length;
             }
         },
         {
             title: upgrader,
             condition: function(assignments) {
                 return assignments.upgrader < 1;
+            }
+        },
+        {
+            title: builder,
+            condition: function(assignments) {
+                return assignments.builder < 1;
             }
         }
     ],
@@ -24,7 +30,7 @@ module.exports = {
             title: harvester,
             condition: function(assignments) {
                 return assignments.harvester < 4 && 
-                       buildings.spawn.energy < buildings.spawn.energyCapacity;
+                       buildings.emptyStorage.length;
             }
         },
         {
@@ -34,9 +40,16 @@ module.exports = {
             }
         },
         {
+            title: harvester,
+            condition: function(assignments) {
+                return assignments.harvester < 6 && 
+                       buildings.emptyStorage.length;
+            }
+        },
+        {
             title: builder,
             condition: function(assignments) {
-                return assignments.builder < 4;
+                return assignments.builder < 6;
             }
         }
     ]

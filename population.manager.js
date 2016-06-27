@@ -7,24 +7,50 @@ module.exports = function(room, assignments, buildings) {
 		};
 
 		roleAssigner(testCreep, assignments, buildings, true);
-		if(!testCreep.memory.assignment) {
+		var assignments = Memory.rooms[room.name].assignments,
+		    popCount = 0;
+		for(var assignment in assignments) {
+		    if(assignments.hasOwnProperty(assignment)) {
+		        continue;
+		    }
+		    popCount += assignments[assignment];
+		}
+		if(popCount < 16) {
 			var extensions = room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return structure.structureType == STRUCTURE_EXTENSION;
                     }
             	}),
-				properties = extensions === 5 ? [
-					WORK, WORK,
-					MOVE,
-					CARRY
-				] : [
-					WORK, WORK, WORK,
-					MOVE,
-					CARRY, CARRY
+				properties = [
+				    [
+    					WORK, WORK,
+    					MOVE,
+    					CARRY
+    				],
+    				[
+    					WORK, WORK,
+    					MOVE,
+    					CARRY, CARRY
+    				],
+    				[
+    					WORK, WORK,
+    					MOVE, MOVE,
+    					CARRY, CARRY
+    				],
+    				[
+    					WORK, WORK, WORK,
+    					MOVE, MOVE,
+    					CARRY, CARRY
+    				],
+    				[
+    					WORK, WORK, WORK,
+    					MOVE, MOVE, MOVE,
+    					CARRY, CARRY
+    				]
 				];
-			var name = buildings.spawn.createCreep(properties);
+			var name = buildings.spawn.createCreep(properties[extensions.length] || properties[properties.length - 1]);
 			if(typeof(name) === 'string') {
-				Memory.room[room.name].creeps.push(name);
+				Memory.rooms[room.name].creeps[name] = {};
 			}
 		}
 };

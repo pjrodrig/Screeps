@@ -11,6 +11,7 @@ module.exports = function(creep, assignments, buildings, populationCheck) {
 	function assignRole(role) {
 		creep.memory.assignment = role;
 		if(!populationCheck) {
+		    Memory.rooms[creep.room.name].creeps[creep.name].assignment = role;
 			assignments[prevAssignment]--;
 			assignments[role]++;
 			roles[role].run(creep);
