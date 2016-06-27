@@ -1,10 +1,10 @@
 module.exports = function(creep, assignments, buildings, populationCheck) {
 	const
-		priorities = require('role.priorities.js')
+		priorities = require('role.priorities')
 		roles = {
-			harvester: require('role.ai.harvester.js'),
-			upgrader: require('role.ai.upgrader.js'),
-			builder: require('role.ai.builder.js')
+			harvester: require('role.ai.harvester'),
+			upgrader: require('role.ai.upgrader'),
+			builder: require('role.ai.builder')
 		},
 		prevAssignment = creep.memory.assignment;
 

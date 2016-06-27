@@ -28,7 +28,7 @@ var roleHarvester = {
                     creep.memory.task = 'harvest';
                 }
             } else {
-                require('role.ai.upgrader.js').run(creep);
+                require('role.ai.upgrader').run(creep);
             }
         }
 	}

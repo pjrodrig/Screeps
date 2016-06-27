@@ -1,6 +1,6 @@
 module.exports = function(room, assignments, buildings) {
 	const
-		roleAssigner = require('role.assigner.js'),
+		roleAssigner = require('role.assigner'),
 		testCreep = {
 			name: '_population_test_creep_',
 			memory: {}

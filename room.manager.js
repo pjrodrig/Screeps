@@ -1,7 +1,7 @@
 module.exports = function(room) {
 	const
-		roleAssigner = require('role.assigner.js'),
-		populationManager = require('population.manager.js'),
+		roleAssigner = require('role.assigner'),
+		populationManager = require('population.manager'),
 		roomMem = Memory.rooms[room.name],
 		assignments = roomMem.assignments;
 		buildings = {},
@@ -38,6 +38,6 @@ module.exports = function(room) {
 	        	delete Memory.creeps[name];
 	        }
 	    }
-	    require('tower.js')(room);
+	    require('tower')(room);
 	    populationManager(room, assignments, buildings);
 };
