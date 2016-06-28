@@ -1,7 +1,6 @@
 module.exports = function(room) {
 
 	function getRoadPath(from, to) {
-		PathFinder.use(true);
 		return room.findPath(from, to, {
 			ignoreCreeps: true,
 			ignoreRoads: true,

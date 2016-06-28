@@ -1,4 +1,7 @@
 module.exports = function(room) {
+    const
+        util = require('util');
+
     var roomMem = Memory.rooms[room.name];   
     if(!roomMem) {
         roomMem = Memory.rooms[room.name] = {};
@@ -8,7 +11,8 @@ module.exports = function(room) {
         var sources = {};
         room.find(FIND_SOURCES).forEach(function(source) {
             sources[creep.id] = {
-                assigned: 0
+                assigned: 0,
+                capacity: getSourceCapacity(source)
             };
         });
 
@@ -23,5 +27,16 @@ module.exports = function(room) {
         };
         room.creeps = creeps;
         room.init = true;
+    }
+
+    function getSourceCapacity(source) {
+        var terrain = util.getSurroundingTerrain(source),
+            count = 0;
+        terrain.forEach(function(square) {
+            if(square.terrain === 'swamp' || square.terrain === 'plain') {
+                count++;
+            }
+        });
+        return count;
     }
 }
