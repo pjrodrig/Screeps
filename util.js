@@ -4,6 +4,6 @@ module.exports = {
             roomObj.pos.y - 1, 
             roomObj.pos.x - 1, 
             roomObj.pos.y + 1, 
-            roomObj.pos.y + 1, {asArray: true})
+            roomObj.pos.x + 1, {asArray: true})
 	}
 };
