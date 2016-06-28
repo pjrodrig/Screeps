@@ -5,16 +5,16 @@ module.exports = function(creep, roomData) {
             creep.memory.sourceId = source.id;
             roomData.sources[source.id].assigned++;
         }
-    } else {
-        work();
     }
 
+    work();
+
     function work() {
-        if(creep.memory.mining && creep.carry.energy == 0) {
-            creep.memory.mining = false;
-        }
-        if(!creep.memory.mining && creep.carry.energy == creep.carryCapacity) {
+        if(!creep.memory.mining && creep.carry.energy == 0) {
             creep.memory.mining = true;
+        }
+        if(creep.memory.mining && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.mining = false;
         }
 
         creep.memory.mining ? mine() : deliver();
@@ -37,9 +37,9 @@ module.exports = function(creep, roomData) {
         }
         if(!container) {
             container = getContainer();
-            creep.memory.destinationId = container.id;
         }
         if(container) {
+            creep.memory.destinationId = container.id;
             if(creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(container);
             }

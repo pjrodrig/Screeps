@@ -25,8 +25,9 @@ module.exports = function(room) {
             upgrader: 0,
             builder: 0
         };
-        room.creeps = creeps;
-        room.init = true;
+        roomMem.sources = sources;
+        roomMem.creeps = creeps;
+        roomMem.init = true;
     }
 
     function getSourceCapacity(source) {
@@ -39,4 +40,4 @@ module.exports = function(room) {
         });
         return count;
     }
-}
+};
