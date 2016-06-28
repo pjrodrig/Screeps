@@ -7,7 +7,7 @@ module.exports = function(room, roomData) {
 		if(creep) {
 			updateCreep(creep);
 		} else {
-			removeCreep(name);
+			removeCreep(creep);
 		}
 	}
 
@@ -23,8 +23,24 @@ module.exports = function(room, roomData) {
 		}
 	}
 
-	function removeCreep(name) {
-		delete room.memory.creeps[name];
-		delete Memory.creeps[name];
+	function removeCreep(creep) {
+		switch(creep.memory.role) {
+			case 'miner':
+				removeMiner(creep);
+				break;
+			case 'mover':
+				break;
+			case 'builder':
+				break;
+		}
+		delete room.memory.creeps[creep.name];
+		delete Memory.creeps[creep.name];
+	}
+
+	function removeMiner(creep) {
+		var sourceId = creep.memory.sourceId;
+		if(sourceId) {
+			room.memory.sources[sourceId].assigned--;
+		}
 	}
 };
