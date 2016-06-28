@@ -3,6 +3,7 @@ module.exports = function(creep, roomData) {
         var source = getSourceAssignment();
         if(source) {
             creep.memory.sourceId = source.id;
+            creep.room.memory.creeps[creep.name].sourceId = source.id;
             roomData.sources[source.id].assigned++;
         }
     }

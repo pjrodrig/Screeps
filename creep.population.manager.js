@@ -8,8 +8,8 @@ module.exports = function(room, roomData) {
 		var priority,
 			startingSourceAtCapacity = false;
 
-		for(var i = 0; i < room.memory.sources.length && !startingSourceAtCapacity; i++) {
-			var source = room.memory.sources[i];
+		for(var id in room.memory.sources) {
+			var source = room.memory.sources[id];
 			if(source.capacity <= source.assigned) {
 				startingSourceAtCapacity = true;
 			}
