@@ -36,12 +36,12 @@ module.exports = function(room, roomData) {
 			case 'builder':
 				break;
 		}
-		delete room.memory.creeps[creep.name];
-		delete Memory.creeps[creep.name];
+		delete room.memory.creeps[name];
+		delete Memory.creeps[name];
 	}
 
 	function removeMiner(name) {
-		var sourceId = room.memory.creeps[creep].sourceId;
+		var sourceId = room.memory.creeps[name].sourceId;
 		if(sourceId) {
 			room.memory.sources[sourceId].assigned--;
 		}
