@@ -34,7 +34,8 @@ module.exports = function(room, roomData) {
 				spawn = roomData.buildings.spawns[i],
 				creep = spawn.createCreep(roleProperties[extensions.length] || roleProperties[roleProperties.length - 1],
 						undefined, {role: priority});
-				if(creep) {
+				if(typeof(creep) === 'string') {
+					room.memory.creeps[creep] = {role: priority};
 					break;
 				}
 			}
