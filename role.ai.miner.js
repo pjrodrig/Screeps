@@ -21,16 +21,44 @@ module.exports = function(creep, roomData) {
     }
 
     function mine() {
-        var source = creep.room.find(FIND_SOURCES, {
-            filter: {id: creep.memory.sourceId}
-        });
+        var source = Game.getObjectById(creep.memory.sourceId);
         if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
             creep.moveTo(source);
         }
     }
 
     function deliver() {
+        var container;
+        if(creep.memory.destinationId) {
+            container = Game.getObjectById(creep.memory.destinationId);
+            if(container.energy === container.energyCapacity) {
+                delete creep.memory.destination;
+            }
+        }
+        if(!container) {
+            container = getContainer();
+            creep.memory.destinationId = container.id;
+        }
+        if(container) {
+            if(creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(container);
+            }
+        } else {
+            creep.memory.mining = true;
+        }
+    }
 
+    function getContainer() {
+        return creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+            filter: function(structure) {
+                return (structure.structureType == STRUCTURE_EXTENSION ||
+                        structure.structureType == STRUCTURE_SPAWN ||
+                        structure.structureType == STRUCTURE_CONTAINER ||
+                        structure.structureType == STRUCTURE_STORAGE) && 
+                        structure.energy < structure.energyCapacity;
+            },
+            algorithm: 'dijkstra'
+        });
     }
 
     function getSourceAssignment() {

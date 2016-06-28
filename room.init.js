@@ -10,7 +10,7 @@ module.exports = function(room) {
     if(!roomMem.init) {
         var sources = {};
         room.find(FIND_SOURCES).forEach(function(source) {
-            sources[creep.id] = {
+            sources[source.id] = {
                 assigned: 0,
                 capacity: getSourceCapacity(source)
             };
