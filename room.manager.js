@@ -10,7 +10,6 @@ module.exports = function(room) {
 		roomMem = Memory.rooms[room.name],
 		roomData = {
 			buildings: {},
-			assignments: roomMem.assignments,
 			sources: roomMem.sources
 		};
 	roomData.buildings.spawns = room.find(FIND_MY_SPAWNS);

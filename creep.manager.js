@@ -1,6 +1,7 @@
 module.exports = function(room, roomData) {
 	const
-		miner = require('role.ai.miner');
+		miner = require('role.ai.miner'),
+		populationManager = require('creep.population.manager');
 
 	for(var name in room.memory.creeps) {
 		var creep = Game.creeps[name];
@@ -10,6 +11,8 @@ module.exports = function(room, roomData) {
 			removeCreep(creep);
 		}
 	}
+
+	populationManager(room, roomData);
 
 	function updateCreep(creep) {
 		switch(creep.memory.role) {
