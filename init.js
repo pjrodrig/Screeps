@@ -1,23 +1,31 @@
 module.exports = function () {
     if(!Memory.rooms){
         Memory.rooms = {};
+    }
+    for(var name in Game.rooms){
+        var room = Game.rooms[room],
+            roomMem = Memory.rooms[name];
+            
+        if(!roomMem) {
+            roomMem = Memory.rooms[name] = {};
+        }
         
-        for(var name in Game.rooms){
+        if(!roomMem.init) {
+            var creeps = {};
+            
+            room.find(FIND_MY_CREEPS).forEach(function(creep) {
+                creeps[creep.name] = {};
+            });
+            
             Memory.rooms[name] = {
                 assignments: {
                     harvester: 0,
                     upgrader: 0,
                     builder: 0
                 },
-                creeps: {}
+                creeps: creeps,
+                init: true
             }
-        }
-        
-        var creep;
-        for(var name in Game.creeps){
-            creep = Game.creeps[name];
-            delete creep.memory.assignment;
-            Memory.rooms[creep.room.name].creeps[name] = {};
         }
     }
 };
