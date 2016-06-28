@@ -5,6 +5,13 @@ module.exports = function(room) {
     }
     
     if(!roomMem.init) {
+        var sources = {};
+        room.find(FIND_SOURCES).forEach(function(source) {
+            sources[creep.id] = {
+                assigned: 0
+            };
+        });
+
         var creeps = {};
         room.find(FIND_MY_CREEPS).forEach(function(creep) {
             creeps[creep.name] = {};
