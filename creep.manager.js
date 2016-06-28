@@ -12,7 +12,7 @@ module.exports = function(room, roomData) {
 	}
 
 	function updateCreep(creep) {
-		switch(creep.memory) {
+		switch(creep.memory.role) {
 			case 'miner':
 				miner(creep, roomData);
 				break;
