@@ -28,4 +28,6 @@ module.exports = function(room) {
             return structure.hits < structure.hitsMax;
         }
     });
+
+    creepManager(room, roomData);
 };
