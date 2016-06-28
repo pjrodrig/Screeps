@@ -3,4 +3,6 @@ const
     roomManager = require('room.manager');
     
 init();
-roomManager(Game.rooms['E37N27']);
+for(var name in Game.rooms){
+    roomManager(Game.rooms[name]);
+}
