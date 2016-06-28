@@ -1,14 +1,14 @@
 module.exports = function(room) {
+	//initialize memory for room if not yet initialized
+	require('room.init')(room);
+
 	const
-		roomInit = require('room.init'),
 		roleAssigner = require('role.assigner'),
 		populationManager = require('population.manager'),
 		roomMem = Memory.rooms[room.name],
 		assignments = roomMem.assignments;
 		buildings = {},
 		mySpawns = room.find(FIND_MY_SPAWNS);
-
-		roomInit(room);
 
         buildings.emptyStorage = targets = room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
