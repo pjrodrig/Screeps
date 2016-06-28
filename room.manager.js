@@ -6,7 +6,7 @@ module.exports = function(room) {
 		roleAssigner = require('role.assigner'),
 		populationManager = require('population.manager'),
 		roomMem = Memory.rooms[room.name],
-		assignments = roomMem.assignments;
+		assignments = roomMem.assignments,
 		buildings = {},
 		mySpawns = room.find(FIND_MY_SPAWNS);
 
