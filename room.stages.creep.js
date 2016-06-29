@@ -21,7 +21,7 @@ module.exports = {
 	],
 	upgraderReq: [
 		function(room) {
-			return room.memory.assignments.upgraderReq >= 4;
+			return room.memory.assignments.upgrader >= 4;
 		}
 	]
 }
