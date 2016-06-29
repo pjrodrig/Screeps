@@ -3,11 +3,9 @@ module.exports = function(room, roomData) {
 		const
 			MINER = 'miner',
 			MOVER = 'mover',
-			BUILDER = 'builder',
+			BUILDER = 'builder';
 
-			roomStages = require('room.stages');
-
-		var role = roomStages[room.memory.stage].getNextUnit(room);
+		var role = roomData.stage.getNextUnit(room);
 
 		if(role) {
 			const
