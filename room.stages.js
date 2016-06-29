@@ -15,19 +15,8 @@ module.exports = [
 			var unit;
 			if(!creepStages.minerReq[0](room)) {
 				unit = MINER;
-			}
-			return unit;
-		},
-		getNextBuildings: function(room) {
-			return [];
-		}
-	},
-	{
-		controllerLevel: 1,
-		getNextUnit: function(room) {
-			var unit;
-			if(!creepStages.minerReq[0](room)) {
-				unit = MINER;
+			} else if(!creepStages.upgraderReq[0](room)) {
+				unit = BUILDER;
 			} else if(!creepStages.builderReq[0](room)) {
 				unit = BUILDER;
 			}
