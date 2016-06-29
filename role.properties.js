@@ -80,24 +80,29 @@ module.exports = {
 
 	upgrader: [
 		[
+			WORK,
+			CARRY, CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY, CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
 			CARRY, CARRY, CARRY, CARRY, CARRY,
 			MOVE
-		],
-		[
-			CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-			MOVE
-		],
-		[
-			CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-			MOVE
-		],
-		[
-			CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-			MOVE, MOVE
-		],
-		[
-			CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-			MOVE, MOVE, MOVE
 		]
 	]
 };
