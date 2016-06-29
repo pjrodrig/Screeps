@@ -4,14 +4,16 @@
  const
 	MINER = 'miner',
 	MOVER = 'mover',
-	BUILDER = 'builder';
+	BUILDER = 'builder',
+
+	creepStages = require('room.stages.creep');
 
 module.exports = [
 	{
 		controllerLevel: 1,
 		getNextUnit: function(room) {
 			var unit;
-			if(!minerReq1(room)) {
+			if(!creepStages.minerReq[0](room)) {
 				unit = MINER;
 			}
 			return unit;
@@ -24,9 +26,9 @@ module.exports = [
 		controllerLevel: 1,
 		getNextUnit: function(room) {
 			var unit;
-			if(!minerReq[0](room)) {
+			if(!creepStages.minerReq[0](room)) {
 				unit = MINER;
-			} else if(!builderReq(room)) {
+			} else if(!creepStages.builderReq[0](room)) {
 				unit = BUILDER;
 			}
 			return unit;
