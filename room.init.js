@@ -22,8 +22,15 @@ module.exports = function(room) {
         room.find(FIND_MY_CREEPS).forEach(function(creep) {
             creeps[creep.name] = {};
         });
+        roomMem.assignments = {
+            miner: 0,
+            builder: 0,
+            mover: 0,
+            upgrader: 0
+        }
         roomMem.sources = sources;
         roomMem.creeps = creeps;
+        roomMem.stage = 1;
         roomMem.init = true;
     }
 

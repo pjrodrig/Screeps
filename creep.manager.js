@@ -27,7 +27,8 @@ module.exports = function(room, roomData) {
 	}
 
 	function removeCreep(name) {
-		switch(room.memory.creeps[name].role) {
+		var role = room.memory.creeps[name].role;
+		switch(role) {
 			case 'miner':
 				removeMiner(name);
 				break;
@@ -36,6 +37,7 @@ module.exports = function(room, roomData) {
 			case 'builder':
 				break;
 		}
+		room.memory.assignments[role]--;
 		delete room.memory.creeps[name];
 		delete Memory.creeps[name];
 	}

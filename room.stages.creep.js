@@ -25,6 +25,9 @@ module.exports = {
 	],
 
 	builderReq: [
+		function(room) {
+			return room.memory.assignments.builder >= 2;
+		}
 	],
 	moverReq: [
 	]

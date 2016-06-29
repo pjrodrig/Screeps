@@ -1,7 +1,8 @@
 module.exports = function(room) {
 	const
 		init = require('room.init'),
-		creepManager = require('creep.manager');
+		creepManager = require('creep.manager'),
+        roomStages = require('room.stages');
 
 	//initialize memory for room if not yet initialized
 	init(room);
@@ -10,8 +11,10 @@ module.exports = function(room) {
 		roomMem = Memory.rooms[room.name],
 		roomData = {
 			buildings: {},
-			sources: roomMem.sources
+			sources: roomMem.sources,
+            stage: roomStages[roomMem.stage] || roomStages[roomStages.length - 1]
 		};
+    roomData.controller = room.controller;
 	roomData.buildings.spawns = room.find(FIND_MY_SPAWNS);
 	roomData.buildings.emptyContainers = room.find(FIND_STRUCTURES, {
         filter: (structure) => {
@@ -29,4 +32,10 @@ module.exports = function(room) {
     });
 
     creepManager(room, roomData);
+    if(!roomData.stage.getNextUnit() && 
+        (!room.controller || room.controller.level >= roomData.stage.controllerLevel) &&
+        !roomData.stage.getNextBuilding().length && roomMem.stage < roomStages.length){
+        roomMem.stage++;
+    }
+
 };

@@ -24,7 +24,7 @@ module.exports = [
 		controllerLevel: 1,
 		getNextUnit: function(room) {
 			var unit;
-			if(!minerReq1(room)) {
+			if(!minerReq[0](room)) {
 				unit = MINER;
 			} else if(!builderReq(room)) {
 				unit = BUILDER;
@@ -32,7 +32,7 @@ module.exports = [
 			return unit;
 		},
 		getNextBuildings: function(room) {
-			var buildings
+			return [];
 		}
 	}
 ];
