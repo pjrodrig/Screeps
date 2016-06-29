@@ -44,4 +44,19 @@ module.exports = function(room) {
         });
         return count;
     }
+
+    if(!roomMem.initSpawn) {
+        var spawns = room.find(FIND_MY_SPAWNS),
+            spawn;
+        if(spawns.length) {
+            spawn = spawns[0];
+            var sources = room.memory.sources;
+            room.find(FIND_SOURCES).forEach(function(source) {
+                sourceMem = sources[source.id];
+                sourceMem.distanceToSpawn = spawn.pos.findPath(source).length;
+            });
+            room.memory.controllerDistance = room.controller.pos.findPath(spawn).length;
+            roomMem.initSpawn = true;
+        }
+    }
 };

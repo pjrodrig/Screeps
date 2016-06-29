@@ -4,7 +4,7 @@ module.exports = {
 			var allSourcesFull = true;
 			for(var id in room.memory.sources) {
 				var source = room.memory.sources[id];
-				if(source.assigned < source.capacity * 2) {
+				if(source.assigned < source.capacity * Math.pow(source.distanceToSpawn, 0.4)) {
 					allSourcesFull = false;
 				}
 			}
@@ -21,7 +21,7 @@ module.exports = {
 	],
 	upgraderReq: [
 		function(room) {
-			return room.memory.assignments.upgrader >= 4;
+			return room.memory.assignments.upgrader >= 4 * Math.pow(room.memory.controllerDistance, 0.4);
 		}
 	]
 }
