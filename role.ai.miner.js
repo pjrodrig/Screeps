@@ -31,7 +31,6 @@ module.exports = function(creep, roomData) {
     function deliver() {
         var container = getContainer();
         if(container) {
-            creep.memory.destinationId = container.id;
             if(creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(container);
             }
@@ -47,7 +46,8 @@ module.exports = function(creep, roomData) {
                         structure.structureType == STRUCTURE_SPAWN ||
                         structure.structureType == STRUCTURE_CONTAINER ||
                         structure.structureType == STRUCTURE_STORAGE) && 
-                        structure.energy < structure.energyCapacity;
+                        (!structure.energy || structure.energy < structure.energyCapacity) &&
+                        (!structure.store || structure.store[RESOURCE_ENERGY] < structure.storeCapacity);
             },
             algorithm: 'dijkstra'
         });

@@ -2,25 +2,33 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.memory.task === 'harvest') {
-    	    if(creep.carry.energy < creep.carryCapacity) {
-                var sources = creep.room.find(FIND_SOURCES);
-                if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(sources[1]);
-                }
-            } else {
-                creep.memory.task = 'upgrade';
-            }
+        if(creep.memory.upgrading && creep.carry.energy == 0) {
+            creep.memory.upgrading = false;
         }
-        else {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+        if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.upgrading = true;
+        }
+
+        if(creep.memory.upgrading) {
+    	    if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
             }
-            if(creep.carry.energy === 0) {
-                creep.memory.task = 'harvest';
+        } else {
+            var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: function(structure) {
+                    return (structure.structureType == STRUCTURE_EXTENSION ||
+                    structure.structureType == STRUCTURE_SPAWN ||
+                    structure.structureType == STRUCTURE_CONTAINER ||
+                    structure.structureType == STRUCTURE_STORAGE) && 
+                    structure.energy;
+                }
+            });
+            if(source.structureType == STRUCTURE_SPAWN ? source.transferEnergy(creep) == ERR_NOT_IN_RANGE :
+                source.transfer(creep, RESOURCE_ENERGY)) {
+                creep.moveTo(source);
             }
         }
-	}
+    }
 };
 
 module.exports = roleUpgrader;
