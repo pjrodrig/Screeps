@@ -1,6 +1,7 @@
 module.exports = function(room, roomData) {
 	const
 		miner = require('role.ai.miner'),
+		builder = require('role.ai.builder'),
 		populationManager = require('creep.population.manager');
 
 	for(var name in room.memory.creeps) {
@@ -22,6 +23,7 @@ module.exports = function(room, roomData) {
 			case 'mover':
 				break;
 			case 'builder':
+				builder.run(creep);
 				break;
 		}
 	}

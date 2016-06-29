@@ -48,5 +48,33 @@ module.exports = {
 			CARRY, CARRY, CARRY, CARRY, CARRY,
 			MOVE, MOVE, MOVE, MOVE, MOVE
 		]
+	],
+
+	builder: [
+		[
+			WORK, WORK,
+			CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY, CARRY, CARRY,
+			MOVE
+		],
+		[
+			WORK, WORK,
+			CARRY, CARRY, CARRY, CARRY, CARRY,
+			MOVE
+		]
 	]
 };

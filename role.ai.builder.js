@@ -53,7 +53,7 @@ var roleBuilder = {
                     structure.energy;
                 }
             });
-            if(source.structureType == STRUCTURE_SPAWN ? source.transferEnergy(creep) == ERR_NOT_IN_RANGE
+            if(source.structureType == STRUCTURE_SPAWN ? source.transferEnergy(creep) == ERR_NOT_IN_RANGE :
                 source.transfer(creep, RESOURCE_ENERGY)) {
                 creep.moveTo(source);
             }
