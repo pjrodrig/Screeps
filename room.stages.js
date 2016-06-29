@@ -5,6 +5,7 @@
 	MINER = 'miner',
 	MOVER = 'mover',
 	BUILDER = 'builder',
+	UPGRADER = 'upgrader',
 
 	creepStages = require('room.stages.creep');
 
@@ -16,7 +17,7 @@ module.exports = [
 			if(!creepStages.minerReq[0](room)) {
 				unit = MINER;
 			} else if(!creepStages.upgraderReq[0](room)) {
-				unit = BUILDER;
+				unit = UPGRADER;
 			} else if(!creepStages.builderReq[0](room)) {
 				unit = BUILDER;
 			}
