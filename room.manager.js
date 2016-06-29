@@ -32,9 +32,9 @@ module.exports = function(room) {
     });
 
     creepManager(room, roomData);
-    if(!roomData.stage.getNextUnit() && 
+    if(!roomData.stage.getNextUnit(room) && 
         (!room.controller || room.controller.level >= roomData.stage.controllerLevel) &&
-        !roomData.stage.getNextBuilding().length && roomMem.stage < roomStages.length){
+        !roomData.stage.getNextBuildings().length && roomMem.stage < roomStages.length){
         roomMem.stage++;
     }
 
