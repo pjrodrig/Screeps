@@ -5,19 +5,7 @@ module.exports = function(room, roomData) {
 			MOVER = 'mover',
 			BUILDER = 'builder';
 
-		var priority,
-			startingSourceAtCapacity = false;
-
-		for(var id in room.memory.sources) {
-			var source = room.memory.sources[id];
-			if(source.capacity <= source.assigned) {
-				startingSourceAtCapacity = true;
-			}
-		}
-
-		if(!startingSourceAtCapacity){
-			priority = MINER;
-		}
+		var priority;
 
 		if(priority) {
 			const

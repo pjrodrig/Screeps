@@ -29,16 +29,7 @@ module.exports = function(creep, roomData) {
     }
 
     function deliver() {
-        var container;
-        if(creep.memory.destinationId) {
-            container = Game.getObjectById(creep.memory.destinationId);
-            if(container.energy === container.energyCapacity) {
-                delete creep.memory.destination;
-            }
-        }
-        if(!container) {
-            container = getContainer();
-        }
+        var container = getContainer();
         if(container) {
             creep.memory.destinationId = container.id;
             if(creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
