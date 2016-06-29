@@ -50,7 +50,8 @@ module.exports = function(room) {
             spawn;
         if(spawns.length) {
             spawn = spawns[0];
-            var sources = room.memory.sources;
+            var sources = room.memory.sources,
+                sourceMem;
             room.find(FIND_SOURCES).forEach(function(source) {
                 sourceMem = sources[source.id];
                 sourceMem.distanceToSpawn = spawn.pos.findPath(source).length;
