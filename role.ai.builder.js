@@ -44,8 +44,17 @@ var roleBuilder = {
                 }
             }
 	    } else {
-	        var source = creep.pos.findClosestByRange(FIND_SOURCES);
-            if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+	        var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: function(structure) {
+                    return (structure.structureType == STRUCTURE_EXTENSION ||
+                    structure.structureType == STRUCTURE_SPAWN ||
+                    structure.structureType == STRUCTURE_CONTAINER ||
+                    structure.structureType == STRUCTURE_STORAGE) && 
+                    structure.energy;
+                }
+            });
+            if(source.structureType == STRUCTURE_SPAWN ? source.transferEnergy(creep) == ERR_NOT_IN_RANGE
+                source.transfer(creep, RESOURCE_ENERGY)) {
                 creep.moveTo(source);
             }
 	    }
