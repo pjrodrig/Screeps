@@ -54,9 +54,9 @@ module.exports = function(room) {
                 sourceMem;
             room.find(FIND_SOURCES).forEach(function(source) {
                 sourceMem = sources[source.id];
-                sourceMem.distanceToSpawn = spawn.pos.findPath(source).length;
+                sourceMem.distanceToSpawn = spawn.pos.findPathTo(source).length;
             });
-            room.memory.controllerDistance = room.controller.pos.findPath(spawn).length;
+            room.memory.controllerDistance = room.controller.pos.findPathTo(spawn).length;
             roomMem.initSpawn = true;
         }
     }
