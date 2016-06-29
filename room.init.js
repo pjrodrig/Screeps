@@ -12,7 +12,9 @@ module.exports = function(room) {
         room.find(FIND_SOURCES).forEach(function(source) {
             sources[source.id] = {
                 assigned: 0,
-                capacity: getSourceCapacity(source)
+                capacity: getSourceCapacity(source),
+                containers: [],
+                storages: []
             };
         });
 
