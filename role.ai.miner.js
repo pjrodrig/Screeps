@@ -58,8 +58,8 @@ module.exports = function(creep, roomData) {
             var aData = roomData.sources[a.id],
                 bData = roomData.sources[b.id],
                 //compare percentage of capacity filled
-                value = (aData.assigned < aData.capacity ? 0 : aData.assigned/aData.capacity * Math.pow(aData.distanceToSpawn, 0.4)) - 
-                (bData.assigned < bData.capacity ? 0 :bData.assigned/bData.capacity * Math.pow(bData.distanceToSpawn, 0.4));
+                value = (aData.assigned < aData.capacity ? 0 : aData.assigned/Math.pow(aData.capacity, 0.4) * Math.pow(aData.distanceToSpawn, 0.8)) - 
+                (bData.assigned < bData.capacity ? 0 :bData.assigned/Math.pow(bData.capacity, 0.4) * Math.pow(bData.distanceToSpawn, 0.8));
             if(value === 0) {
                 var aDistance = a.distToCreep || creep.room.findPath(creep.pos, a.pos, {
                         ignoreCreeps: true,
