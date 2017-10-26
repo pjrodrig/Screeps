@@ -33,3 +33,18 @@ function collect(creep, target) {
 function deposit(creep, target) {
 
 }
+
+function getSources(creep) {
+    return creep.room.find(FIND_SOURCES).map(function(source) {
+        return {
+            obj: source,
+            type:'source',
+            subType: 'source',
+            numTarged
+        }
+    });
+}
+
+function getContainers(creep) {
+
+}
