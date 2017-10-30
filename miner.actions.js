@@ -1,6 +1,3 @@
-const
-    roomService = require('room.service');
-
 module.exports = {
     getActions: getActions
 };
@@ -14,8 +11,9 @@ function getActions(creep) {
         targedByCreep: true,
 
     };
-    roomService.getSources(creep);
-    roomService.getContainers(creep);
+    let creepMemory = Memory.creeps[creep.id];
+    _getSources(creep, creepMemory);
+    _getContainers(creep, creepMemory);
 }
 
 function moveTo(creep, target) {
@@ -34,17 +32,42 @@ function deposit(creep, target) {
 
 }
 
-function getSources(creep) {
+function _getSources(creep, creepMemory) {
     return creep.room.find(FIND_SOURCES).map(function(source) {
+        let sourceMemory = Memory.sources[source.id];
         return {
-            obj: source,
+            id: source.id,
             type:'source',
-            subType: 'source',
-            numTarged
-        }
+            numTargedBy: sourceMemory.numTargedBy,
+            numAssignedTo: sourceMemory.numAssignedTo,
+            isLastTarget: creepMemory.lastTarget === source.id,
+            isTargetSource: creepMemory.targetSource === source.id
+        };
     });
 }
 
-function getContainers(creep) {
+function _getContainers(creep, creepMemory) {
+    return _getRoomContainers().map(function(source) {
+        let sourceMemory = Memory.sources[source.id];
+        return {
+            id: source.id,
+            type:'source',
+            numTargedBy: sourceMemory.numTargedBy,
+            numAssignedTo: sourceMemory.numAssignedTo,
+            isLastTarget: creepMemory.lastTarget === source.id,
+            isTargetSource: creepMemory.targetSource === source.id
+        };
+    });
+}
 
+function _getRoomContainers(room) {
+    return room.find(FIND_STRUCTURES, {
+            filter: function(structure) {
+                return (
+                        structure.structureType == STRUCTURE_EXTENSION ||
+                        structure.structureType == STRUCTURE_SPAWN
+                    )
+                    && structure.energy < structure.energyCapacity;
+            }
+    });
 }
